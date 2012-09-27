@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlas.Tests", "Atlas.Tests\Atlas.Tests.csproj", "{2E017EF6-561B-4D2C-B67A-AA5906ACF5DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlas.UI", "Atlas.UI\Atlas.UI.csproj", "{11B7ACD9-A337-4731-A0EB-C8B6167E41A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11B7ACD9-A337-4731-A0EB-C8B6167E41A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B7ACD9-A337-4731-A0EB-C8B6167E41A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B7ACD9-A337-4731-A0EB-C8B6167E41A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B7ACD9-A337-4731-A0EB-C8B6167E41A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E017EF6-561B-4D2C-B67A-AA5906ACF5DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E017EF6-561B-4D2C-B67A-AA5906ACF5DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E017EF6-561B-4D2C-B67A-AA5906ACF5DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E017EF6-561B-4D2C-B67A-AA5906ACF5DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
