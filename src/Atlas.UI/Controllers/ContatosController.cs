@@ -46,7 +46,7 @@ namespace Atlas.UI.Controllers
         }
 
         //
-        // GET: /Contato/New
+        // GET: /Contatos/New
         [HttpGet]
         public ActionResult New()
         {
@@ -54,18 +54,18 @@ namespace Atlas.UI.Controllers
         }
 
         //
-        // GET: /Contato/[id]
+        // GET: /Contatos/[id]
         [HttpGet]
-        public ActionResult Show(int id)
+        public ActionResult Edit(int id)
         {
             var contato = DocumentSession.Load<Contato>(id);
 
-            return View("Show",Mapper.Map<Contato,ContatoViewModel>(contato));
+            return View("Edit",Mapper.Map<Contato,ContatoViewModel>(contato));
         }
 
         //
-        // PUT: /Contato/[id]
-        [HttpPut]
+        // POST: /Contatos/[id]
+        [HttpPost]
         public ActionResult Update(int id, ContatoViewModel viewModel)
         {
             var contato = DocumentSession.Load<Contato>(id);
@@ -75,12 +75,12 @@ namespace Atlas.UI.Controllers
 
             TempData["success"] = "Contato atualizado com sucesso";
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         //
-        // DELETE: /Contato/[id]
-        [HttpPut]
+        // DELETE: /Contatos/[id]
+        [HttpDelete]
         public ActionResult Delete(int id)
         {
             var contato = DocumentSession.Load<Contato>(id);
@@ -88,12 +88,12 @@ namespace Atlas.UI.Controllers
 
             TempData["success"] = "Contato deletado com sucesso";
 
-            return View("Index");
+            return null;
         }
 
         //
-        // PUT: /Contato/[id]/AddPhone
-        [HttpPut]
+        // POST: /Contatos/[id]/AddPhone
+        [HttpPost]
         public ActionResult AddPhone(int id, TelefoneViewModel viewModel)
         {
             var contato = DocumentSession.Load<Contato>(id);
@@ -104,6 +104,15 @@ namespace Atlas.UI.Controllers
             TempData["success"] = string.Format("Telefone {0} adicionado.",telefone);
 
             return View("Show",Mapper.Map<Contato,ContatoViewModel>(contato));
+        }
+
+        //
+        // GET: /Contatos/[id]/AddPhone
+        [HttpGet]
+        public ActionResult AddPhone(int id)
+        {
+            var contato = DocumentSession.Load<Contato>(id);
+            return PartialView("_AddPhone", Mapper.Map<Contato,ContatoViewModel>(contato));
         }
     }
 }

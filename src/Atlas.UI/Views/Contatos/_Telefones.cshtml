@@ -1,0 +1,14 @@
+﻿@model System.Collections.Generic.IEnumerable<Atlas.UI.Models.TelefoneViewModel>
+<table>
+    <tr>
+        <th>Numero</th>
+        <th>Operadora</th>
+    </tr>
+    @foreach(var telefone in Model)
+    {
+        <tr>
+            <td>@telefone.Numero</td>
+            <td>@telefone.Operadora</td>
+        </tr>
+    }
+</table>

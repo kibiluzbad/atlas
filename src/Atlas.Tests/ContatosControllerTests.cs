@@ -53,10 +53,10 @@ namespace Atlas.Tests
                                   Nome = "Nome"
                               };
 
-            var result = controller.Create(contato) as ViewResult;
+            var result = controller.Create(contato);
 
-            Assert.That(result.ViewName,
-                Is.EqualTo("Index"));
+            Assert.That(result,
+                Is.InstanceOf<RedirectToRouteResult>());
         }
 
         [Test]
@@ -168,7 +168,7 @@ namespace Atlas.Tests
 
 
         [Test]
-        public void Posso_exibir_os_dados_do_contato_ao_chamar_a_rota_Contatos_informando_seu_id()
+        public void Posso_editar_os_dados_do_contato()
         {
             var controller = new ContatosController(Session);
 
@@ -186,10 +186,10 @@ namespace Atlas.Tests
             Session.Store(contato);
             Session.SaveChanges();
            
-            var result = controller.Show(contato.Id) as ViewResult;
+            var result = controller.Edit(contato.Id) as ViewResult;
 
             Assert.That(result.ViewName,
-                Is.EqualTo("Show"));
+                Is.EqualTo("Edit"));
         }
     }
 }

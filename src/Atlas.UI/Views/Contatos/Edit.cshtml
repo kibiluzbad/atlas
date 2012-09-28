@@ -1,0 +1,22 @@
+﻿@model Atlas.UI.Models.ContatoViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form action="@Url.Action("Update","Contatos",new{id = Model.Id})" method="POST">
+    <div>
+        @Html.LabelFor(c=>c.Nome)
+        @Html.TextBoxFor(c=>c.Nome)
+    </div>
+    <div>
+        @Html.LabelFor(c=>c.Apelido)
+        @Html.TextBoxFor(c=>c.Apelido)
+    </div>
+
+    <a href="@Url.Action("AddPhone","Contatos", new {id = Model.Id})" class="openModal" data-method="GET">Incluir Telefone</a>
+    @Html.Partial("_Telefones",Model.Telefones)
+
+    <input type="submit" value="Salvar"/>
+</form>

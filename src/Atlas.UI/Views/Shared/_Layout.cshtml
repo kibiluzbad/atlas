@@ -5,10 +5,21 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Atlas - @ViewBag.Title</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 </head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
+    <body>
+        @if(null != TempData["success"])
+        {
+            <div class="success">
+                @TempData["success"]
+            </div>
+        }
+        <div>
+            @RenderBody()
+        </div>
+        <div id="modal"></div>
+        <script src="@Url.Content("~/Public/js/app.js")"></script>
+    </body>
 </html>

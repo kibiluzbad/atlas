@@ -192,6 +192,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="Public\js\app.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -223,7 +224,13 @@
     <Content Include="Views\Shared\DisplayTemplates\ContatoViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Contatos\Show.cshtml" />
+    <Content Include="Views\Contatos\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contatos\_Telefones.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contatos\_AddPhone.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
