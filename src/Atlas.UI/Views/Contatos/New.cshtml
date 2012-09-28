@@ -5,3 +5,16 @@
 }
 
 <h2>New</h2>
+
+@using(Html.BeginForm("Create","Contatos",FormMethod.Post))
+{
+    <div class="field">
+        @Html.LabelFor(c=>c.Nome)
+        @Html.TextBoxFor(c=>c.Nome)
+    </div>
+    <div class="field">
+        @Html.LabelFor(c=>c.Apelido)
+        @Html.TextBoxFor(c=>c.Apelido)
+    </div>
+    <input type="submit" value="Salvar"/>
+}

@@ -14,17 +14,33 @@ namespace Atlas.UI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            routes.MapRoute(
+                "Root",
+                "",
+                new {controller = "Contatos", action = "Index"},
+                new {httpMethod = new HttpMethodConstraint("GET")}
+                );
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+               "NewContato",
+               "Contatos/New",
+               new { controller = "Contatos", action = "New" },
+               new { httpMethod = new HttpMethodConstraint("GET") }
+               );
+
+            routes.MapRoute(
+               "CreateContato",
+               "Contatos/",
+               new { controller = "Contatos", action = "Create" },
+               new { httpMethod = new HttpMethodConstraint("POST") }
+               );
+
+            routes.MapRoute(
+             "ShowContato",
+             "Contatos/{id}",
+             new { controller = "Contatos", action = "Show" },
+             new { httpMethod = new HttpMethodConstraint("POST"), id = "\\d+" }
+             );
         }
     }
 }

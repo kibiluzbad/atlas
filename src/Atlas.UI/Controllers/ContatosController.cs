@@ -42,7 +42,7 @@ namespace Atlas.UI.Controllers
 
             TempData["success"] = "Contato incluido com sucesso";
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         //
