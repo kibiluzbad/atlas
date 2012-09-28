@@ -55,5 +55,24 @@ namespace Atlas.Tests
             Assert.That(contato.Apelido,
                 Is.EqualTo(apelido));
         }
+
+        [Test]
+        public void Nao_devo_conseguir_incluir_telefones_repetidos()
+        {
+            const string nome = "NovoContato";
+            const string apelido = "Novo1";
+
+            var contato = new Contato
+            {
+                Nome = nome,
+                Apelido = apelido
+            };
+
+            contato.IncluiTelefone("011981234567",Operadora.Tim);
+            contato.IncluiTelefone("011981234567", Operadora.Tim);
+            
+            Assert.That(contato.Telefones.Count(),
+                Is.EqualTo(1));
+        }
     }
 }

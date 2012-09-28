@@ -5,10 +5,10 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Atlas.UI.Infra;
+using AutoMapper;
 using Autofac;
 using Autofac.Integration.Mvc;
-using Raven.Client;
-using Raven.Client.Embedded;
 
 namespace Atlas.UI
 {
@@ -24,6 +24,14 @@ namespace Atlas.UI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             RegisterContainer();
+
+            RegisterMaps();
+        }
+
+        private static void RegisterMaps()
+        {
+            Mapper.AddProfile<ContatoProfile>();
+            Mapper.AddProfile<TelefoneProfile>();
         }
 
         private static void RegisterContainer()
@@ -36,20 +44,6 @@ namespace Atlas.UI
             var container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-        }
-    }
-
-    public class ApplicationModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.Register(c => new EmbeddableDocumentStore())
-                .As<IDocumentStore>()
-                .SingleInstance();
-
-            builder.Register(c => c.Resolve<IDocumentStore>().OpenSession())
-                .As<IDocumentSession>()
-                .InstancePerHttpRequest();
         }
     }
 }

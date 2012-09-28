@@ -32,5 +32,10 @@ namespace Atlas.UI.Domain
                 return ((Numero != null ? Numero.GetHashCode() : 0) * 397) ^ Operadora.GetHashCode();
             }
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0} - {1}",Numero,Operadora);
+        }
     }
 }

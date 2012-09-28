@@ -6,6 +6,8 @@ namespace Atlas.UI.Domain
     {
         private readonly ICollection<Telefone> _telefones;
 
+        public int Id { get; protected set; }
+
         public virtual string Nome { get; set; }
 
         public virtual string Apelido { get; set; }
@@ -22,7 +24,12 @@ namespace Atlas.UI.Domain
 
         public virtual void IncluiTelefone(string numero, Operadora operadora)
         {
-            _telefones.Add(new Telefone(numero, operadora));
+            IncluiTelefone(new Telefone(numero, operadora));
+        }
+
+        public virtual void IncluiTelefone(Telefone telefone)
+        {
+            _telefones.Add(telefone);
         }
     }
 }
