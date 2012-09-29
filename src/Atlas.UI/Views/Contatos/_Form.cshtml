@@ -3,10 +3,12 @@
 <div class="field">
     @Html.LabelFor(c=>c.Nome)
     @Html.TextBoxFor(c=>c.Nome)
+    @Html.ValidationMessageFor(c=>c.Nome)
 </div>
 <div class="field">
     @Html.LabelFor(c=>c.Apelido)
     @Html.TextBoxFor(c=>c.Apelido)
+    @Html.ValidationMessageFor(c=>c.Apelido)
 </div>
 
 <input type="submit" value="Salvar"/>

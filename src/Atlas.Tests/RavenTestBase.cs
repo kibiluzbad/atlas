@@ -1,6 +1,8 @@
+using Atlas.UI.Infra;
 using NUnit.Framework;
 using Raven.Client;
 using Raven.Client.Embedded;
+using Raven.Client.Indexes;
 
 namespace Atlas.Tests
 {
@@ -39,6 +41,7 @@ namespace Atlas.Tests
                         {
                             RunInMemory = true
                         }.Initialize();
+            IndexCreation.CreateIndexes(typeof(Contato_Search).Assembly,Store);
         }
 
         protected virtual void SetupFunc()

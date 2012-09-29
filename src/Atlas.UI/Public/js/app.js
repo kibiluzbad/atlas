@@ -4,15 +4,24 @@
 
         var $el = $(this);
         var action = $el.attr("href");
-        var method = "DELETE";
+        var method = $el.data("method");
+        if (!method) method = "DELETE";
+        
+        var params = $el.data("params");
+        var redirectTo = $el.data("redirect");
         
         if (confirm("Deseja realmente fazer isso?"))
             $.ajax({
                 url: action,
                 type: method,
                 success: function(data, textStatus, jqXHR) {
-                    window.location.reload();
-                }
+                    if (!redirectTo) {
+                        window.location.reload();
+                        return;
+                    }
+                    window.location.replace(redirectTo);
+                },
+                data: params
             });
     });
 
@@ -21,15 +30,30 @@
         
         var $el = $(this);
         var action = $el.attr("href");
-        var method = $el.prop("method");
+        var method = $el.data("method");
+        var width = $el.data("width");
         
         $.ajax({
             url: action,
             type: method,
             success: function (data, textStatus, jqXHR) {
                 $("#modal").html(data);
-                $("#modal").dialog();
+                $("#modal").dialog({ width: width });
             }
+        });
+    });
+
+    $("#contatos").each(function() {
+        var $el = $(this);
+        var totalPages = $el.data("total-pages");
+        var url = $el.data("url");
+        var params = $el.data("params");
+        
+        $("#contatos").pageless({
+            totalPages: totalPages
+            , url: url
+            , loaderMsg: 'Carregando...'
+            , params: params
         });
     });
 });

@@ -1,0 +1,8 @@
+﻿@model Atlas.UI.Models.PagedResultViewModel<Atlas.UI.Models.ContatoViewModel>
+
+@foreach(var contato in Model.Result)
+    {
+        <li class="contato">
+            @Html.DisplayFor(c => contato)
+        </li>
+    }

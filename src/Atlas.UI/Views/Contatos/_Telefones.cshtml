@@ -1,14 +1,20 @@
-﻿@model System.Collections.Generic.IEnumerable<Atlas.UI.Models.TelefoneViewModel>
+﻿@model Atlas.UI.Models.ContatoViewModel
 <table>
     <tr>
         <th>Numero</th>
         <th>Operadora</th>
+        <th></th>
     </tr>
-    @foreach(var telefone in Model)
+    @foreach(var telefone in Model.Telefones)
     {
         <tr>
             <td>@telefone.Numero</td>
             <td>@telefone.Operadora</td>
+            <td><a href="@Url.Action("DeletePhone","Contatos",new {id = Model.Id})"
+                   class="excluir"
+                   data-method="post"
+                   data-redirect="@Url.Action("Edit","Contatos",new{id = Model.Id})" 
+                   data-params='{"Operadora":"@telefone.Operadora","Numero":"@telefone.Numero"}'>Excluir</a></td>
         </tr>
     }
 </table>

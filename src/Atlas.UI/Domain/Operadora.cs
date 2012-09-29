@@ -7,6 +7,7 @@ namespace Atlas.UI.Domain
         Vivo,
         Telefonica,
         Embratel,
-        Net
+        Net,
+        Oi
     }
 }

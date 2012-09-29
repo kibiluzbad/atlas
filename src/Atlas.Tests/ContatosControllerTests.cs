@@ -12,6 +12,8 @@ using Atlas.UI.Models;
 using AutoMapper;
 using Moq;
 using NUnit.Framework;
+using Raven.Client.Indexes;
+using Raven.Client.Linq;
 
 namespace Atlas.Tests
 {
@@ -191,5 +193,32 @@ namespace Atlas.Tests
             Assert.That(result.ViewName,
                 Is.EqualTo("Edit"));
         }
+
+        [Test]
+        public void Devo_exibir_a_view_Index_ao_pesquisar_contatos()
+        {
+            var controller = new ContatosController(Session);
+
+            Mapper.AddProfile<ContatoProfile>();
+            Mapper.AddProfile<TelefoneProfile>();
+
+            var contato = new Contato
+            {
+                Apelido = "Apelido",
+                Nome = "Nome"
+            };
+
+            contato.IncluiTelefone("011981234567", Operadora.Tim);
+
+            Session.Store(contato);
+            Session.SaveChanges();
+
+            var result = controller.Index("Nome") as ViewResult;
+
+            Assert.That(result.ViewName,
+                Is.EqualTo("Index"));
+        }
     }
+
+    
 }

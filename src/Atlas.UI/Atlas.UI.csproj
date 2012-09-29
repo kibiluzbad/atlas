@@ -183,6 +183,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infra\NameGenerator.cs" />
+    <Compile Include="Models\PagedResultViewModel.cs" />
     <Compile Include="Infra\ApplicationModule.cs" />
     <Compile Include="Infra\ContatoProfile.cs" />
     <Compile Include="Controllers\ContatosController.cs" />
@@ -220,6 +222,9 @@
     <Content Include="Public\js\app.js" />
     <Content Include="Public\js\libs\jquery-1.8.2.min.js" />
     <Content Include="Public\js\libs\jquery-ui-1.8.24.custom.min.js" />
+    <Content Include="Public\js\libs\jquery.pageless.min.js" />
+    <Content Include="Public\js\libs\jquery.validate.min.js" />
+    <Content Include="Public\js\libs\jquery.validate.unobtrusive.min.js" />
     <Content Include="Raven.Studio.xap" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -262,6 +267,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Contatos\_Form.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contatos\_Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contatos\_Contatos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Atlas.UI.Domain
 {
@@ -27,6 +28,12 @@ namespace Atlas.UI.Domain
         public virtual void IncluiTelefone(Telefone telefone)
         {
             Telefones.Add(telefone);
+        }
+
+        public virtual Telefone RemoveTelefone(Telefone telefone)
+        {
+            Telefones.Remove(telefone);
+            return telefone;
         }
     }
 }

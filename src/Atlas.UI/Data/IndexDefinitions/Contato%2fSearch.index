@@ -1,0 +1,20 @@
+{
+  "Name": "Contato/Search",
+  "Map": "docs.Contatos\r\n\t.Select(c => new {Id = c.__document_id, Nome = c.Nome, Apelido = c.Apelido, Query = Enumerable.Concat(new System.String []{c.Nome, c.Apelido}, c.Telefones\r\n\t.Select(t => t.Numero))})",
+  "Maps": [
+    "docs.Contatos\r\n\t.Select(c => new {Id = c.__document_id, Nome = c.Nome, Apelido = c.Apelido, Query = Enumerable.Concat(new System.String []{c.Nome, c.Apelido}, c.Telefones\r\n\t.Select(t => t.Numero))})"
+  ],
+  "Reduce": null,
+  "TransformResults": null,
+  "IsMapReduce": false,
+  "IsCompiled": false,
+  "IsTemp": false,
+  "Stores": {},
+  "Indexes": {
+    "Query": "Analyzed"
+  },
+  "SortOptions": {},
+  "Analyzers": {},
+  "Fields": [],
+  "Type": "Map"
+}

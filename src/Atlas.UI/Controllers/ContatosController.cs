@@ -8,27 +8,53 @@ using Atlas.UI.Infra;
 using Atlas.UI.Models;
 using AutoMapper;
 using Raven.Client;
+using Raven.Client.Indexes;
+using Raven.Client.Linq;
 
 namespace Atlas.UI.Controllers
 {
     public class ContatosController : RavenController
     {
-        public ContatosController(IDocumentSession documentSession) 
+        public ContatosController(IDocumentSession documentSession)
             : base(documentSession)
-        { }
+        {
+        }
 
         //
-        // GET: /Contatos/
+        // GET: /
         [HttpGet]
-        public ActionResult Index(int page = 1, int size = 20)
+        public ActionResult Index(string term = null, int page = 1, int size = 20)
         {
-            var contatos = DocumentSession.Query<Contato>()
+            RavenQueryStatistics stats;
+            IRavenQueryable<Contato_Search.ContatoSearch> query = null;
+
+            if (!string.IsNullOrEmpty(term))
+                query = DocumentSession.Query<Contato_Search.ContatoSearch, Contato_Search>()
+                .Statistics(out stats)
+                    .Search(c => c.Query,string.Format("*{0}*",term), escapeQueryOptions: EscapeQueryOptions.AllowAllWildcards);
+            else
+                query = DocumentSession.Query<Contato_Search.ContatoSearch, Contato_Search>()
+                    .Statistics(out stats);
+             
+                var contatos = query
                 .Skip((page - 1)*size)
                 .Take(size)
+                .As<Contato>()
                 .ToList();
 
-            return View("Index",
-                        Mapper.Map<IEnumerable<Contato>, IEnumerable<ContatoViewModel>>(contatos));
+            ViewBag.Term = term ?? string.Empty;
+
+            var result = new PagedResultViewModel<ContatoViewModel>
+                {
+                    Page = page,
+                    Size = size,
+                    Result = Mapper.Map<IEnumerable<Contato>, IEnumerable<ContatoViewModel>>(contatos),
+                    Count = stats.TotalResults
+                };
+
+            return RespondTo(normal: () => View("Index", result),
+                             ajax: () => PartialView("_Contatos", result));
+
         }
 
         //
@@ -36,13 +62,15 @@ namespace Atlas.UI.Controllers
         [HttpPost]
         public ActionResult Create(ContatoViewModel contatoViewModel)
         {
+            if (!ModelState.IsValid) return View("New",contatoViewModel);
+            
             var contato = Mapper.Map<ContatoViewModel, Contato>(contatoViewModel);
 
             DocumentSession.Store(contato);
 
             TempData["success"] = "Contato incluido com sucesso";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit",new{ contato.Id});
         }
 
         //
@@ -60,7 +88,7 @@ namespace Atlas.UI.Controllers
         {
             var contato = DocumentSession.Load<Contato>(id);
 
-            return View("Edit",Mapper.Map<Contato,ContatoViewModel>(contato));
+            return View("Edit", Mapper.Map<Contato, ContatoViewModel>(contato));
         }
 
         //
@@ -96,14 +124,32 @@ namespace Atlas.UI.Controllers
         [HttpPost]
         public ActionResult AddPhone(int id, TelefoneViewModel viewModel)
         {
+            if (!ModelState.IsValid) return RedirectToAction("Edit",new {id});
+
             var contato = DocumentSession.Load<Contato>(id);
             var telefone = Mapper.Map<Telefone>(viewModel);
 
             contato.IncluiTelefone(telefone);
 
-            TempData["success"] = string.Format("Telefone {0} adicionado.",telefone);
+            TempData["success"] = string.Format("Telefone {0} adicionado.", telefone);
 
-            return View("Edit",Mapper.Map<Contato,ContatoViewModel>(contato));
+            return View("Edit", Mapper.Map<Contato, ContatoViewModel>(contato));
+        }
+
+        //
+        // POST: /Contatos/[id]/DeletePhone
+        [HttpPost]
+        public ActionResult DeletePhone(int id, TelefoneViewModel telefoneViewModel)
+        {
+            var telefone = Mapper.Map<TelefoneViewModel, Telefone>(telefoneViewModel);
+            
+            var contato = DocumentSession.Load<Contato>(id);
+
+            contato.RemoveTelefone(telefone);
+
+            TempData["success"] = string.Format("Telefone {0} removido.", telefone);
+
+            return null;
         }
 
         //
@@ -111,8 +157,8 @@ namespace Atlas.UI.Controllers
         [HttpGet]
         public ActionResult AddPhone(int id)
         {
-            var contato = DocumentSession.Load<Contato>(id);
-            return PartialView("_AddPhone", Mapper.Map<Contato,ContatoViewModel>(contato));
+            ViewBag.ContatoId = id;
+            return PartialView("_AddPhone");
         }
     }
 }

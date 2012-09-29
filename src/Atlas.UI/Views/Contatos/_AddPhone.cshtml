@@ -1,13 +1,24 @@
-﻿@model Atlas.UI.Models.ContatoViewModel
-<form action="@Url.Action("AddPhone","Contatos",new {id = Model.Id})" method="POST">
+﻿@model Atlas.UI.Models.TelefoneViewModel
+<form action="@Url.Action("AddPhone","Contatos",new {id = ViewBag.ContatoId})" method="POST">
     <div class="field">
-        <label>Telefone:</label>
-        <input id="Numero" name="Numero"/>
+        @Html.LabelFor(c=>c.Numero)
+        @Html.TextBoxFor(c=>c.Numero)
+        @Html.ValidationMessageFor(c=>c.Numero)
     </div>
     <div class="field">
-        <label>Operadora:</label>
-        <input id="Operadora" name="Operadora"/>
+        @Html.LabelFor(c=>c.Operadora)
+        <select id="Operadora" name="Operadora">
+            <option value="Claro">Claro</option>
+            <option value="Tim">Tim</option>
+            <option value="Vivo">Vivo</option>
+            <option value="Telefonica">Telefonica</option>
+            <option value="Embratel">Embratel</option>
+            <option value="Oi">Oi</option>
+            <option value="Net">Net</option>
+        </select>
+        @Html.ValidationMessageFor(c=>c.Operadora)
     </div>
     <input type="submit" value="Salvar"/>
 </form>
+<script src="@Url.Content("~/Public/js/libs/jquery.validate.unobtrusive.min.js")"></script>
 
