@@ -1,25 +1,22 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Atlas.UI.Domain
 {
     public class Contato
     {
-        private readonly ICollection<Telefone> _telefones;
-
         public int Id { get; protected set; }
 
         public virtual string Nome { get; set; }
 
         public virtual string Apelido { get; set; }
 
-        public virtual IEnumerable<Telefone> Telefones
-        {
-            get { return _telefones; }
-        }
+        [JsonProperty]
+        public virtual ICollection<Telefone> Telefones { get;  protected set; }
 
         public Contato()
         {
-            _telefones = new HashSet<Telefone>();
+            Telefones = new HashSet<Telefone>();
         }
 
         public virtual void IncluiTelefone(string numero, Operadora operadora)
@@ -29,7 +26,7 @@ namespace Atlas.UI.Domain
 
         public virtual void IncluiTelefone(Telefone telefone)
         {
-            _telefones.Add(telefone);
+            Telefones.Add(telefone);
         }
     }
 }

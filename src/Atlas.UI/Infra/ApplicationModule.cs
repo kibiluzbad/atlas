@@ -11,7 +11,8 @@ namespace Atlas.UI.Infra
         {
             builder.Register(c => new EmbeddableDocumentStore
                                       {
-                                          DataDirectory = "Data"
+                                          DataDirectory = "Data",
+                                          UseEmbeddedHttpServer = true
                                       }.Initialize())
                 .As<IDocumentStore>()
                 .SingleInstance();

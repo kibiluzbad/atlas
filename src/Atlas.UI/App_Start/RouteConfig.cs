@@ -55,6 +55,20 @@ namespace Atlas.UI
               new { controller = "Contatos", action = "Delete" },
               new { httpMethod = new HttpMethodConstraint("DELETE"), id = "\\d+" }
               );
+
+            routes.MapRoute(
+              "ContatoAddPhone",
+              "Contatos/{id}/AddPhone",
+              new { controller = "Contatos", action = "AddPhone" },
+              new { httpMethod = new HttpMethodConstraint("GET"), id = "\\d+" }
+              );
+
+            routes.MapRoute(
+              "ContatoSavePhone",
+              "Contatos/{id}/AddPhone",
+              new { controller = "Contatos", action = "AddPhone" },
+              new { httpMethod = new HttpMethodConstraint("POST"), id = "\\d+" }
+              );
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿@model Atlas.UI.Models.ContatoViewModel
-<form action="@Url.Action("AddPhone","Contatos",new {id = Model.Id})">
+<form action="@Url.Action("AddPhone","Contatos",new {id = Model.Id})" method="POST">
     <div class="field">
         <label>Telefone:</label>
-        <input id="Telefone" name="Telefone"/>
+        <input id="Numero" name="Numero"/>
     </div>
     <div class="field">
         <label>Operadora:</label>
         <input id="Operadora" name="Operadora"/>
     </div>
+    <input type="submit" value="Salvar"/>
 </form>
 

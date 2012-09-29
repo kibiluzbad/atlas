@@ -103,7 +103,7 @@ namespace Atlas.UI.Controllers
 
             TempData["success"] = string.Format("Telefone {0} adicionado.",telefone);
 
-            return View("Show",Mapper.Map<Contato,ContatoViewModel>(contato));
+            return View("Edit",Mapper.Map<Contato,ContatoViewModel>(contato));
         }
 
         //
