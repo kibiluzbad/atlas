@@ -13,7 +13,7 @@ namespace Atlas.UI.Infra
             value = HttpUtility.HtmlEncode(value);
             term = HttpUtility.HtmlEncode(term);
 
-            return helper.Raw(Regex.Replace(value,term,string.Format("<span class=\"highlight\">{0}</span>", term),RegexOptions.CultureInvariant | RegexOptions.IgnoreCase ));
+            return helper.Raw(Regex.Replace(value,term,(match) => string.Format("<span class=\"highlight\">{0}</span>", match.Value),RegexOptions.CultureInvariant | RegexOptions.IgnoreCase ));
         }
     }
 }
