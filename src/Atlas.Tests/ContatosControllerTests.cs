@@ -62,27 +62,6 @@ namespace Atlas.Tests
         }
 
         [Test]
-        public void Devo_chamar_SaveChanges_da_DocumentSession_para_gravar_o_contato_na_Store()
-        {
-            var controller = new ContatosController(Session);
-
-            Mapper.AddProfile<ContatoProfile>();
-
-            var contato = new ContatoViewModel
-            {
-                Apelido = "Apelido",
-                Nome = "Nome"
-            };
-
-            var result = controller.Create(contato) as ViewResult;
-
-            Session.SaveChanges();
-
-            Assert.That(Session.Query<Contato>().FirstOrDefault(c => c.Nome == "Nome"),
-                Is.InstanceOf<Contato>());
-        }
-
-        [Test]
         public void Devo_alterar_o_contato_ao_efetuar_um_Put_para_contatos_com_id_do_contato()
         {
             var controller = new ContatosController(Session);
