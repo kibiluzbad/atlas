@@ -2,6 +2,7 @@ using System.Reflection;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Raven.Client;
+using Raven.Client.Document;
 using Raven.Client.Embedded;
 using Raven.Client.Indexes;
 using Module = Autofac.Module;
@@ -14,6 +15,7 @@ namespace Atlas.UI.Infra
         {
             builder.Register(c =>
                 {
+#if DEBUG
                     var store = new EmbeddableDocumentStore
                         {
                             DataDirectory = "Data",
@@ -25,6 +27,20 @@ namespace Atlas.UI.Infra
                     IndexCreation.CreateIndexes(Assembly.GetExecutingAssembly(), store);
 
                     return store;
+                    
+#else
+                    var store = new DocumentStore
+                        {
+                            ConnectionStringName = "RavenDB"
+                        };
+
+                    store.Initialize();
+
+                    IndexCreation.CreateIndexes(Assembly.GetExecutingAssembly(), store);
+
+                    return store;
+#endif
+
                 })
                 .As<IDocumentStore>()
                 .SingleInstance();
