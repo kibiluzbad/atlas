@@ -62,7 +62,7 @@ namespace Atlas.Tests
         }
 
         [Test]
-        public void Devo_alterar_o_contato_ao_efetuar_um_Put_para_contatos_com_id_do_contato()
+        public void Devo_alterar_o_contato_ao_efetuar_um_Post_para_contatos_com_id_do_contato()
         {
             var controller = new ContatosController(Session);
 

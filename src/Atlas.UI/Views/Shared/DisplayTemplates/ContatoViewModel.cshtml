@@ -1,5 +1,6 @@
-﻿@model Atlas.UI.Models.ContatoViewModel
+﻿@using Atlas.UI.Infra
+@model Atlas.UI.Models.ContatoViewModel
 <div class="title">
-    <a href="@Url.Action("Edit","Contatos",new{id = Model.Id})">@Model.Nome (@Model.Apelido)</a>
+    <a href="@Url.Action("Edit","Contatos",new{id = Model.Id})">@Html.Highlight(Model.Nome,(string)ViewBag.Term) (@Html.Highlight(Model.Apelido,(string)ViewBag.Term))</a>
     @Html.ActionLink("Excluir","Delete","Contatos",new{id = Model.Id},new{@class="excluir"})
 </div>

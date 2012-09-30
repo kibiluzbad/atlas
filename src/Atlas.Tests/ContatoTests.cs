@@ -57,7 +57,7 @@ namespace Atlas.Tests
         }
 
         [Test]
-        public void Nao_devo_conseguir_incluir_telefones_repetidos()
+        public void Nao_devo_conseguir_incluir_telefones_repetidos_com_mesma_operadora()
         {
             const string nome = "NovoContato";
             const string apelido = "Novo1";
@@ -71,6 +71,25 @@ namespace Atlas.Tests
             contato.IncluiTelefone("011981234567",Operadora.Tim);
             contato.IncluiTelefone("011981234567", Operadora.Tim);
             
+            Assert.That(contato.Telefones.Count(),
+                Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Nao_devo_conseguir_incluir_telefones_repetidos_com_operadoras_diferentes()
+        {
+            const string nome = "NovoContato";
+            const string apelido = "Novo1";
+
+            var contato = new Contato
+            {
+                Nome = nome,
+                Apelido = apelido
+            };
+
+            contato.IncluiTelefone("011981234567", Operadora.Tim);
+            contato.IncluiTelefone("011981234567", Operadora.Claro);
+
             Assert.That(contato.Telefones.Count(),
                 Is.EqualTo(1));
         }

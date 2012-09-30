@@ -22,14 +22,14 @@ namespace Atlas.UI.Domain
 
         protected bool Equals(Telefone other)
         {
-            return string.Equals(Numero, other.Numero) && Operadora.Equals(other.Operadora);
+            return string.Equals(Numero, other.Numero);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return ((Numero != null ? Numero.GetHashCode() : 0) * 397) ^ Operadora.GetHashCode();
+                return ((Numero != null ? Numero.GetHashCode() : 0) * 397);
             }
         }
 

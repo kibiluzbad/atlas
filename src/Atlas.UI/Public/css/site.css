@@ -387,3 +387,8 @@ li {
     font-family: inherit;
     font-size: inherit;
 }
+
+.highlight {
+    background-color: #333;
+    color: #eee;
+}
