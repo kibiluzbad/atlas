@@ -38,7 +38,10 @@
             type: method,
             success: function (data, textStatus, jqXHR) {
                 $("#modal").html(data);
-                $("#modal").dialog({ width: width });
+                $("#modal").dialog({
+                    width: width,
+                    modal: true
+                });
             }
         });
     });
@@ -55,5 +58,11 @@
             , loaderMsg: 'Carregando...'
             , params: params
         });
+    });
+
+    $("#error-message").each(function () {
+        var $el = $(this);
+        $el.fadeIn(400);
+        $el.fadeOut(3000);
     });
 });

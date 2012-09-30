@@ -1,14 +1,17 @@
 ﻿@model Atlas.UI.Models.ContatoViewModel
 
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = "Novo";
 }
-
-<h2>New</h2>
 
 @using(Html.BeginForm("Create","Contatos",FormMethod.Post))
 {
    @Html.Partial("_Form",Model)
 }
 
-@Html.ActionLink("Voltar","Index","Contatos")
+@Html.ActionLink("Voltar","Index","Contatos",null,new{@class="edit"})
+
+@section header
+{
+    <link href="@Url.Content("~/Public/css/form.css")" rel="stylesheet" media="all" type="text/css"/>
+}

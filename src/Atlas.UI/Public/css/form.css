@@ -1,0 +1,53 @@
+﻿label{
+float: left;
+width: 120px;
+font-weight: bold;
+}
+
+input, textarea{
+width: 180px;
+margin-bottom: 5px;
+
+}
+
+input[type=text], textarea {
+    border: 1px solid #ccc;
+}
+textarea{
+width: 250px;
+height: 150px;
+}
+
+.boxes{
+width: 1em;
+}
+
+input[type=submit]{
+margin-left: 120px;
+margin-top: 5px;
+width: 90px;
+}
+
+br{
+clear: left;
+}
+
+form .input-validation-error {
+    border-color: #ff3e13;
+}
+
+form .field-validation-error {
+    color: #ff3e13;
+}
+
+table {
+    width: 100%;
+    border:1px solid #ddd;
+    padding: 2px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+table th {
+    border:1px solid #ddd;
+}

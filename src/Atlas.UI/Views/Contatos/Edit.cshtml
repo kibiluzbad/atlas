@@ -1,16 +1,19 @@
 ﻿@model Atlas.UI.Models.ContatoViewModel
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editando";
 }
-
-<h2>Edit</h2>
 
 @using (Html.BeginForm("Update", "Contatos", FormMethod.Post))
 {
     @Html.Partial("_Form", Model)
 }
 
-<a href="@Url.Action("AddPhone","Contatos", new {id = Model.Id})" class="openModal" data-width="500px" data-method="GET">Incluir Telefone</a>
+<a href="@Url.Action("AddPhone","Contatos", new {id = Model.Id})" class="openModal edit" data-width="500px" data-method="GET">Incluir Telefone</a>
 @Html.Partial("_Telefones",Model)
 
-@Html.ActionLink("Voltar","Index","Contatos")
+@Html.ActionLink("Voltar","Index","Contatos",null,new{@class="edit"})
+
+@section header
+{
+    <link href="@Url.Content("~/Public/css/form.css")" rel="stylesheet" media="all" type="text/css"/>
+}

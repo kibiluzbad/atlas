@@ -1,5 +1,5 @@
 ﻿@model Atlas.UI.Models.ContatoViewModel
-<div>
+<div class="title">
     <a href="@Url.Action("Edit","Contatos",new{id = Model.Id})">@Model.Nome (@Model.Apelido)</a>
     @Html.ActionLink("Excluir","Delete","Contatos",new{id = Model.Id},new{@class="excluir"})
 </div>

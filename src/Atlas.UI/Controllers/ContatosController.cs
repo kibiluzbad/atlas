@@ -8,7 +8,6 @@ using Atlas.UI.Infra;
 using Atlas.UI.Models;
 using AutoMapper;
 using Raven.Client;
-using Raven.Client.Indexes;
 using Raven.Client.Linq;
 
 namespace Atlas.UI.Controllers
@@ -39,6 +38,7 @@ namespace Atlas.UI.Controllers
                 var contatos = query
                 .Skip((page - 1)*size)
                 .Take(size)
+                .OrderBy(c=>c.Nome)
                 .As<Contato>()
                 .ToList();
 
@@ -52,6 +52,7 @@ namespace Atlas.UI.Controllers
                     Count = stats.TotalResults
                 };
 
+            
             return RespondTo(normal: () => View("Index", result),
                              ajax: () => PartialView("_Contatos", result));
 
@@ -62,15 +63,26 @@ namespace Atlas.UI.Controllers
         [HttpPost]
         public ActionResult Create(ContatoViewModel contatoViewModel)
         {
-            if (!ModelState.IsValid) return View("New",contatoViewModel);
-            
-            var contato = Mapper.Map<ContatoViewModel, Contato>(contatoViewModel);
+            if (!ModelState.IsValid) return View("New", contatoViewModel);
 
-            DocumentSession.Store(contato);
+            var contato = DocumentSession
+               .Query<Contato_Search.ContatoSearch, Contato_Search>()
+               .As<Contato>()
+               .FirstOrDefault(c => c.Nome == contatoViewModel.Nome);
 
-            TempData["success"] = "Contato incluido com sucesso";
+            if(null == contato)
+            {
+                contato = Mapper.Map<ContatoViewModel, Contato>(contatoViewModel);
+                DocumentSession.Store(contato);
+                TempData["success"] = "Contato incluido com sucesso";
+            }
+            else
+            {
+                TempData["error"] = string.Format("Já existe um contato com o nome {0}", contato.Nome);
+            }
 
-            return RedirectToAction("Edit",new{ contato.Id});
+            return RedirectToAction("Edit", new {contato.Id});
+         
         }
 
         //
@@ -96,14 +108,27 @@ namespace Atlas.UI.Controllers
         [HttpPost]
         public ActionResult Update(int id, ContatoViewModel viewModel)
         {
-            var contato = DocumentSession.Load<Contato>(id);
+            var contato = DocumentSession
+                .Query<Contato_Search.ContatoSearch, Contato_Search>()
+                .As<Contato>()
+                .FirstOrDefault(c => c.Nome == viewModel.Nome &&
+                                     c.Id != viewModel.Id);
 
-            contato.Apelido = viewModel.Apelido;
-            contato.Nome = viewModel.Nome;
+            if (null == contato)
+            {
+                contato = DocumentSession.Load<Contato>(id);
 
-            TempData["success"] = "Contato atualizado com sucesso";
+                contato.Apelido = viewModel.Apelido;
+                contato.Nome = viewModel.Nome;
 
-            return RedirectToAction("Index");
+                TempData["success"] = "Contato atualizado com sucesso";
+
+                return RedirectToAction("Index");
+            }
+
+            TempData["error"] = string.Format("Já existe um contato com o nome {0}", contato.Nome);
+
+            return RedirectToAction("Edit", new {id = contato.Id});
         }
 
         //

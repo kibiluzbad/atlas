@@ -9,6 +9,7 @@ using Atlas.UI.Infra;
 using AutoMapper;
 using Autofac;
 using Autofac.Integration.Mvc;
+using NLog;
 
 namespace Atlas.UI
 {
@@ -16,6 +17,8 @@ namespace Atlas.UI
     // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -26,6 +29,13 @@ namespace Atlas.UI
             RegisterContainer();
 
             RegisterMaps();
+
+            _logger.Info("Aplicação iniciada.");
+        }
+
+        protected void Application_End()
+        {
+            _logger.Info("Aplicação finalizada.");
         }
 
         private static void RegisterMaps()

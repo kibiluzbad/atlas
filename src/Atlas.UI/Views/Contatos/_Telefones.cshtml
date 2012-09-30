@@ -1,20 +1,24 @@
 ﻿@model Atlas.UI.Models.ContatoViewModel
-<table>
-    <tr>
-        <th>Numero</th>
-        <th>Operadora</th>
-        <th></th>
-    </tr>
-    @foreach(var telefone in Model.Telefones)
-    {
+
+@if (null != Model.Telefones && Model.Telefones.Any())
+{
+    <table>
         <tr>
-            <td>@telefone.Numero</td>
-            <td>@telefone.Operadora</td>
-            <td><a href="@Url.Action("DeletePhone","Contatos",new {id = Model.Id})"
-                   class="excluir"
-                   data-method="post"
-                   data-redirect="@Url.Action("Edit","Contatos",new{id = Model.Id})" 
-                   data-params='{"Operadora":"@telefone.Operadora","Numero":"@telefone.Numero"}'>Excluir</a></td>
+            <th>Numero</th>
+            <th>Operadora</th>
+            <th></th>
         </tr>
-    }
-</table>
+        @foreach (var telefone in Model.Telefones)
+        {
+            <tr>
+                <td>@telefone.Numero</td>
+                <td>@telefone.Operadora</td>
+                <td><a href="@Url.Action("DeletePhone", "Contatos", new {id = Model.Id})"
+                       class="excluir edit"
+                       data-method="post"
+                       data-redirect="@Url.Action("Edit", "Contatos", new {id = Model.Id})" 
+                       data-params='{"Operadora":"@telefone.Operadora","Numero":"@telefone.Numero"}'>Excluir</a></td>
+            </tr>
+        }
+    </table>
+}

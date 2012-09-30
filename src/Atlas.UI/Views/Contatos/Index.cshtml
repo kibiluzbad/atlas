@@ -1,14 +1,14 @@
 ﻿@model Atlas.UI.Models.PagedResultViewModel<Atlas.UI.Models.ContatoViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Contatos";
 }
-
-<h2>Index</h2>
 
 @Html.Partial("_Search",(string)ViewBag.Term)
 
-@Html.ActionLink("Novo","New","Contatos")
+<br />
+
+@Html.ActionLink("Adicionar","New","Contatos",null,new{@class="edit"})
 
 <ul id="contatos" 
     data-url="@Url.Action("Index","Contatos")" 

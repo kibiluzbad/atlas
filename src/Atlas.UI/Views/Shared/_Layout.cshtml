@@ -6,17 +6,27 @@
     <meta name="viewport" content="width=device-width" />
     <title>Atlas - @ViewBag.Title</title>
     <link href="@Url.Content("~/Public/css/jquery.ui/jquery-ui-1.8.24.custom.css")" rel="stylesheet" media="all" type="text/css"/>
-    
+    <link href="@Url.Content("~/Public/css/site.css")" rel="stylesheet" media="all" type="text/css"/>
+    @RenderSection("header",false)
 </head>
     <body>
-        @if(null != TempData["success"])
-        {
-            <div class="success">
-                @TempData["success"]
+        <div id="main" data-yield="main">
+            @if (null != TempData["success"])
+            {
+                <div id="error-message" class="success">
+                    @TempData["success"]
+                    @TempData["error"]
+                </div>
+            }
+            @if (null != TempData["error"])
+            {
+                <div id="error-message">
+                    @TempData["error"]
+                </div>
+            }
+            <div id="wrap">
+                @RenderBody()
             </div>
-        }
-        <div>
-            @RenderBody()
         </div>
         <div id="modal"></div>
         <script src="@Url.Content("~/Public/js/libs/jquery-1.8.2.min.js")"></script>

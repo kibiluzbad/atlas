@@ -1,0 +1,7 @@
+﻿C:\Program Files (x86)\IIS Express> "C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe" /t:library /utf8output /R:"C:\Users\leonardo\AppData\Local\Temp\Temporary ASP.NET Files\root\66abbf7b\e55f388b\assembly\dl3\412cbb51\ff708942_5b9ecd01\Raven.Abstractions.dll" /R:"C:\Users\leonardo\AppData\Local\Temp\Temporary ASP.NET Files\root\66abbf7b\e55f388b\assembly\dl3\66d84e8c\407e8c42_5b9ecd01\Raven.Database.dll" /R:"C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll" /R:"C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll" /R:"C:\Windows\Microsoft.Net\assembly\GAC_MSIL\Microsoft.CSharp\v4.0_4.0.0.0__b03f5f7f11d50a3a\Microsoft.CSharp.dll" /R:"C:\Users\leonardo\AppData\Local\Temp\Temporary ASP.NET Files\root\66abbf7b\e55f388b\assembly\dl3\95d4f620\bf638642_5b9ecd01\Lucene.Net.dll" /out:"D:\Users\Leonardo\Work\atlas\src\Atlas.UI\Data\IndexDefinitions\TemporaryIndexDefinitionsAsSource\veycbewy.dll" /debug- /optimize+  "D:\Users\Leonardo\Work\atlas\src\Atlas.UI\Data\IndexDefinitions\TemporaryIndexDefinitionsAsSource\veycbewy.0.cs"
+
+
+Microsoft (R) Visual C# Compiler version 4.0.30319.17929
+for Microsoft (R) .NET Framework 4.5
+Copyright (C) Microsoft Corporation. All rights reserved.
+
